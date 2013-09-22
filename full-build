@@ -1,0 +1,6 @@
+pdflatex main
+bibtex8 --csfile cp1251 --big main
+pdflatex main
+pdflatex main
+evince 'main.pdf' > /dev/null;
+

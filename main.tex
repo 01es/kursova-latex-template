@@ -1,0 +1,199 @@
+% Oles Hodych March 2009
+
+\documentclass[k]{vakthesis}
+% Існують кілька опцій, які необхідно вказувати як факультативний
+% аргумент команди \documentclass. Для магістерської роботи m, курсової роботи k, дипломної роботи d.
+% Наприклад, для курсової роботи необхідно написати
+% \documentclass[k]{vakthesis}
+
+% Налагодження кодування шрифта, кодування вхідного файла
+% та вибір необхідних мов
+\usepackage[T2A]{fontenc}
+\usepackage[cp1251]{inputenc}
+\usepackage[english,russian,ukrainian]{babel}
+
+\usepackage{graphicx}
+\usepackage{subfigure}
+\usepackage{alltt}
+\usepackage{moreverb}
+\usepackage{setspace}
+\usepackage{algorithmic}
+\usepackage{algorithm}
+\usepackage{multirow}
+\usepackage{bigstrut}
+\usepackage{makecell}
+\usepackage[table]{xcolor}
+\usepackage{tabularx}
+\usepackage{wrapfig}% використаний замість пакету floatflt, який був вилучений із texlive що постачається із ubuntu 10.04.
+\usepackage{url}
+\usepackage{array}
+\usepackage{booktabs}
+% Підключення необхідних пакетів. Наприклад,
+% Пакети AMS для підтримки математики, теорем, спеціальних шрифтів
+\usepackage[intlimits]{amsmath}
+\allowdisplaybreaks
+\usepackage{amsthm}
+\usepackage{amssymb}
+% Налагодження нумерованих списків
+%\usepackage{enumerate}
+% Гіпертекстові документи
+%\usepackage{hyperref}
+% або лише спеціальне форматування URL
+%\usepackage{url}
+% У списку літератури зворотні вказівки на посилання
+%\usepackage{backref}
+% Сортування посилань
+%\usepackage[noadjust]{cite}
+% Останні два пакети несумісні між собою. Крім того, конфліктують з цим класом!
+
+% Налагодження параметрів сторінки (зокрема берегів).
+% Наприклад, за допомогою пакета geometry
+\usepackage{geometry}
+\geometry{hmargin={30mm,15mm},vmargin={26mm,26mm}}
+
+% TikZ
+\usepackage[version=0.96]{pgf}
+\usepackage{tikz}
+\usetikzlibrary{arrows,shapes,shapes.arrows,shapes.misc,snakes,automata,backgrounds,petri,patterns,positioning,scopes,chains,matrix,decorations.pathmorphing,shadows}
+
+% Означення теорем (теоремоподібних структур)
+% Класичний варіант: для кожної теореми свій лічильник,
+% тобто теорема 1.1, лема 1.1, теорема 1.2
+\theoremstyle{plain}
+\newtheorem{theorem}{Теорема}[chapter]
+\newtheorem{lemma}{Лема}[chapter]
+\newtheorem{corollary}{Наслідок}[chapter]
+\theoremstyle{definition}
+\newtheorem{definition}{Означення}[chapter]
+\newtheorem{example}{Приклад}[chapter]
+\theoremstyle{remark}
+\newtheorem{remark}{Зауваження}[chapter]
+\theoremstyle{statement}
+\newtheorem{statement}{Твердження}[chapter]
+\usepackage{listings}
+
+% Цікавий варіант: всі теореми нумеруються одним лічильником,
+% тобто теорема 1.1, лема 1.2, теорема 1.3
+%\theoremstyle{plain}
+%\newtheorem{theorem}{Теорема}[chapter]
+%\newtheorem{lemma}[theorem]{Лема}
+%\newtheorem{corollary}[theorem]{Наслідок}
+%\theoremstyle{definition}
+%\newtheorem{definition}[theorem]{Означення}
+%\newtheorem{example}[theorem]{Приклад}
+%\theoremstyle{remark}
+%\newtheorem{remark}[theorem]{Зауваження}
+
+% Якщо потрібно працювати лише з деякими розділами
+%\includeonly{xampl-ch1,xampl-bib}
+
+% Інформація про використані пакети тощо.
+% Може знадобитися для відлагодження класу документа
+%\listfiles
+
+% custom commands
+\def\argmin{\mathop{\rm arg\,min}} %define \argmin command
+
+\begin{document}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%% Tkz styles %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\tikzset{
+  terminal/.style={
+    % The shape:
+    rounded rectangle,
+    minimum size=6mm,
+    % The border:
+    very thick,
+    draw=green!50!black!50,         % 50% red and 50% black,
+                                  % and that mixed with 50% white
+    % The filling:
+    top color=white,              % a shading that is white at the top...
+    bottom color=green!50!black!20, % and something else at the bottom
+    % Font
+    font=\itshape,text centered
+  },
+  process/.style={
+    % The shape:
+    rectangle,
+    % The size:
+    minimum size=6mm,
+    % The rest
+    very thick,draw=black!50,
+    top color=white,bottom color=black!20,
+    font=\ttfamily,text centered
+  },
+  decision/.style={
+    % The shape:
+    diamond, 
+    minimum size=6mm,    
+    % The rest
+    very thick,draw=black!50,
+    top color=white,bottom color=black!20,
+    font=\ttfamily,text centered
+  },
+  data/.style={
+    % The shape:
+    trapezium,
+    trapezium left angle=70, 
+    trapezium right angle=110,    
+    minimum size=6mm,    
+    % The rest
+    very thick,draw=black!50,
+    top color=white,bottom color=black!20,
+    font=\ttfamily,text centered
+  },
+  line/.style={draw, very thick, color=black!50,rounded corners},
+  help-lines/.style={draw, very thin, color=black!50},
+  arrow/.style={draw, very thick, color=black!50, -latex',rounded corners},
+  helper-arrow/.style={draw, very thin, color=black, -latex'},
+  dashed-line/.style={draw, dashed, color=black},
+  point/.style={coordinate}
+}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\floatname{algorithm}{Алгоритм} 
+% Назва дисертації, курсової, магістерської
+\title{Це стаб для оформлення дисертації, курсової, магістерської}
+% Прізвище, ім'я, по батькові здобувача
+\author{Прізвище Автора Роботи}
+% Прізвище, ім'я, по батькові наукового керівника/консультанта
+\supervisor{Прізвище Керівника Роботи}
+% Науковий ступінь, вчене звання наукового керівника/консультанта
+           {кандидат фізико-математичних наук, доцент}
+% Спеціальність
+%\speciality{01.05.03}[технічних наук]
+% Варіант із вказуванням факультативних аргументів
+\speciality{01.05.03}
+% Індекс за УДК
+\udc{004.853+004.855.5}
+% Установа, де виконана робота, і місто
+\institution{НУ ``Львівська політехніка''}{Львів}
+% Рік, коли написана (подана до захисту?) дисертація
+\date{2012}
+
+% Тут буде титульна сторінка
+\maketitle
+
+% Зміст
+\setcounter{tocdepth}{2} % контролює рівень заголовків, які повинні відображатись у змісті
+\tableofcontents
+\nocite{*}
+%\listoftables 
+%\listoffigures
+
+\lstset{basicstyle=\footnotesize, language=Java,morekeywords={val,def,object}}
+
+% Розділи дисертації в окремих файлах
+\include{chapters/00-intro/intro}%                                                      Вступ
+\include{chapters/01-problem-overview/problem-overview}%                                Розділ 1
+\include{chapters/02-the-core/the-core}%                                                Розділ 2
+\include{chapters/03-software-and-experiments/software-and-experiments}%                Розділ 3
+\include{chapters/04-conclusion/conclusion}%                                            Висновки
+\include{chapters/05-bibliography/bibliography}%                                        Список використаних джерел (+список публікацій автора)
+
+\end{document}

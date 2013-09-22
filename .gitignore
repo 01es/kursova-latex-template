@@ -1,0 +1,13 @@
+*.aux
+*.backup
+*.tex~
+*.bib~
+*.dvi
+*.bbl
+*.log
+*.ps
+*.blg
+*.toc
+*~
+*.lof
+*.lot
